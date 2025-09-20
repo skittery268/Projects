@@ -1,285 +1,208 @@
+import random
 from colorama import *
 
 init()
 
-user_info = []
-user_balance = []
+print("მოგესალმებით, ამ თამაშში კომპიუტერი ჩაიფიქრებს რიცხვს, თქვენი დავალება კი იქნება, რომ გამოიცნოთ ჩაფიქრებული რიცხვი.")
+print("სულ იქნება 5 ლეველი, განმარტებები:")
 
 while True:
-    print(Fore.YELLOW + Style.BRIGHT + "======    Bank    ======")
-    print("1) რეგისტრაცია")
-    print("2) აქაუნთში შესვლა")
-    print("3) გასვლა" + Style.RESET_ALL)
-    answer1 = input("თქვენი მოქმედება: ")
-
     print()
+    print("1 ლეველი: კომპიუტერი ჩაიფიქრებს რიცხვს 1-იდან 20-მდე, ცდების რაოდენობა: 5")
+    print("2 ლეველი: კომპიუტერი ჩაიფიქრებს რიცხვს 1-იდან 100-მდე, ცდების რაოდენობა: 7")
+    print("3 ლეველი: კომპიუტერი ჩაიფიქრებს რიცხვს 1-იდან 500-მდე, ცდების რაოდენობა: 10")
+    print("4 ლეველი: კომპიუტერი ჩაიფიქრებს რიცხვს 1-იდან 1000-მდე, ცდების რაოდენობა: 12")
+    print("5 ლეველი (very hard level): კომპიუტერი ჩაიფიქრებს ათწილად რიცხვს 0-იდან 1-მდე, ცდების რაოდენობა: 60")
+    
+    while True:
+        try:
+            answer0 = int(input("შეიყვანეთ ლეველი რომლის გავლაც გინდათ: "))
+            break
+        except ValueError:
+            print("თქვენ მიუთითეთ არასწორი მაჩვენებელი, გთხოვთ სცადეთ თავიდან.")
 
-    if answer1 == "1" or answer1 == "რეგისტრაცია":
-        while True:
-            user_name = input(Fore.BLUE + Style.BRIGHT + "თქვენი სახელი: " + Style.RESET_ALL)
-
-            if len(user_name) < 4:
-                print()
-                print(Fore.RED + Style.BRIGHT + "თქვენ აქაუნთის სახელში უნდა იყოს 4 სიმბოლო ან მეტი!" + Style.RESET_ALL)
-            else:
-                print()
-                print(Fore.GREEN + Style.BRIGHT + "მიღებულია." + Style.RESET_ALL)
-                user_info.append([user_name])
-                user_balance.append([user_name])
-                break
-
-        while True: 
-            print()
-            user_password = input(Fore.BLUE + Style.BRIGHT + "თქვენი პაროლი: " + Style.RESET_ALL)
-
-            if len(user_password) < 8:
-                print()
-                print(Fore.RED + Style.BRIGHT + "თქვენ პაროლში უნდა იყოს 8 სიმბოლო ან მეტი." + Style.RESET_ALL)
-            else:
-                print()
-                print(Fore.GREEN + Style.BRIGHT + "მიღებულია." + Style.RESET_ALL)
-                user_info[-1].append(user_password)
-                break
-
+    if answer0 == 1:
+        comp_number1 = random.randint(1, 20)
+        trials1 = 5
         print()
-        print(Fore.GREEN + Style.BRIGHT + "აქაუნთი შექმნილია!" + Style.RESET_ALL)
-        balance = 0
-        user_balance[-1].append(balance)
-        print()
-
-        while True:
-            print(Fore.YELLOW + Style.BRIGHT + "======    Bank    ======")
-            print("1) ბალანსი")
-            print("2) ბალანსის შევსება")
-            print("3) თანხის გამოტანა")
-            print("4) აქაუნთიდან გასვლა" + Style.RESET_ALL)
-            answer01 = input("თქვენი მოქმედება: ")
-            print()
-
-            if answer01 == "1" or answer01 == "ბალანსი":
-                print(Fore.GREEN + Style.BRIGHT + "თქვენი ბალანსი:", user_balance[-1][-1], Style.RESET_ALL)
-                print()
-            elif answer01 == "2" or answer01 == "ბალანსის შევსება":
-                while True:
-                    while True:
-                        try:
-                            answer001 = int(input("შეიყვანეთ თანხა რომლის შეტანაც გინდათ ბანკის ანგარიშზე: "))
-                            print()
-                            break
-                        except:
-                            print("თქვენ მიუთითეთ არასწორი მაჩვენებელი, გთხოვთ სცადოთ თავიდან.")
-                            print()
-
-                    if answer001 < 0:
-                        print(Fore.RED + Style.BRIGHT + "თქვენ არ შეგიძლიათ უარყოფითი თანხის შეტანა ანგარიშზე." + Style.RESET_ALL)
-                        print()
-                    else:
-                        bal1 = int(user_balance[-1][-1])
-                        new_balance1 = bal1 + answer001
-                        user_balance[-1].append(new_balance1)
-                        print(Fore.GREEN + Style.BRIGHT + "თქვენ წარმატებით შეიყვანეთ თანხა ანგარიშზე." + Style.RESET_ALL)
-                        print()
-                        break
-            elif answer01 == "3" or answer01 == "თანხის გამოტანა":
-                while True:
-                    while True:
-                        try:
-                            answer002 = int(input("შეიყვანეთ თანხა რომლის გამოტანაც გინდათ თქვენი ანგარიშიდან: "))
-                            print()
-                            break
-                        except:
-                            print("თქვენ მიუთითეთ არასწორი მაჩვენებელი, გთხოვთ სცადოთ თავიდან.")
-
-                    if answer002 > int(user_balance[-1][-1]):
-                        print(Fore.RED + Style.BRIGHT + "თქვენ არასაკმარისი თანხა გაქვთ ბალანსზე, გთხოვთ მიუთითოთ თავიდან." + Style.RESET_ALL)
-                        print()
-                    elif answer002 < 0:
-                        print(Fore.RED + Style.BRIGHT + "თქვენ არ შეგიძლიათ უარყოფითი თანხის რაოდენობის გამოტანა." + Style.RESET_ALL)
-                        print()
-                    else:
-                        bal2 = int(user_balance[-1][-1])
-                        new_balance2 = bal2 - answer002
-                        user_balance[-1].append(new_balance2)
-                        print(Fore.GREEN + Style.BRIGHT + "თქვენ წარმატებით გამოიტანეთ თანხა ბანკის ანგარიშიდან." + Style.RESET_ALL)
-                        print()
-                        break
-            elif answer01 == "4" or answer01 == "აქაუნთიდან გასვლა":
-                print(Fore.GREEN + Style.BRIGHT + "თქვენ წარმატებით გახვედით აქაუნთიდან!" + Style.RESET_ALL)
-                print()
-                break
-            else:
-                print(Fore.RED + Style.BRIGHT + "თქვენ მიუთითეთ არასწორი მაჩვენებელი, გთხოვთ სცადოთ თავიდან." + Style.RESET_ALL)
-                print()
-    elif answer1 == "2" or answer1 == "აქაუნთში შესვლა":
-        print("""მოქმედების გასაუქმებლად შეიყვანეთ "გაუქმება" """)
+        print("კომპიუტერმა ჩაიფიქნა რიცხვი 1-იდან 20-მდე.")
         while True:
             print()
-            user_name = input(Fore.BLUE + Style.BRIGHT + "შეიყვანეთ თქვენი სახელი: " + Style.RESET_ALL)
-            id1 = False
-            id_len = False
-            print()
-
-            if user_name == "გაუქმება":
-                break
-
-            if len(user_info) == 0:
-                print(Fore.RED + Style.BRIGHT + "აქაუნთი ასეთი სახელით არ არსებობს." + Style.RESET_ALL)
-                id_len = True
-            else:
-                for i in range(len(user_info)):
-                    if user_info[i][0] == user_name:
-                        print(Fore.GREEN + Style.BRIGHT + "მიღებულია." + Style.RESET_ALL)
-                        id1 = True
-                        break
-
-            if id1 == False and id_len == False:
-                print(Fore.RED + Style.BRIGHT + "აქაუნთი ასეთი სახელით არ არსებობს." + Style.RESET_ALL)
             
-            if id1 == True:
-                break
-            else:
-                pass
-            
-        if id1 == True:
-            print()
-            print("""მოქმედების გასაუქმებლად შეიყვანეთ "გაუქმება" """)
-        
-        while id1 == True:
-            print()
-            user_password = input(Fore.BLUE + Style.BRIGHT + "შეიყვანეთ თქვენი პაროლი: " + Style.RESET_ALL)
-            id2 = False
-            print()
-
-            if user_password == "გაუქმება":
-                break
-
-            for i in range(len(user_info)):
-                if user_info[i][-1] == user_password:
-                    print(Fore.GREEN + Style.BRIGHT + f"მიღებულია, მოგესალმებით {user_name}" + Style.RESET_ALL)
-                    id2 = True
-                    print()
+            while True:
+                try:
+                    answer1 = int(input("შეიყვანეთ თქვენი ვარაუდი: "))
                     break
+                except ValueError:
+                    print("თქვენ მიუთითეთ არასწორი მაჩვენებელი, გთხოვთ სცადეთ თავიდან.")
             
-            if id2 == False:
-                print(Fore.RED + Style.BRIGHT + "არასწორი პაროლია." + Style.RESET_ALL)
-            
-            if id2 == True:
+            trials1 -= 1
+
+            if trials1 == -1:
+                print()
+                print(Fore.RED + Style.BRIGHT + "სამწუხაროდ თქვენ დაგიმთავრდათ ცდები, თქვენ წააგეთ ეს რაუნდი.")
+                print(f"კომპიუტერის მიერ ჩაფიქრებული რიცხვი იყო: {comp_number1}" + Style.RESET_ALL)
                 break
+            elif answer1 > comp_number1:
+                print()
+                print(f"კომპიუტერის მიერ ჩაფიქრებული რიცხვი ნაკლებია ვიდრე თქვენი რიცხვი.           ცდების რაოდენობა: {trials1}")
+            elif answer1 < comp_number1:
+                print()
+                print(f"კომპიუტერის მიერ ჩაფიქრებული რიცხვი მეტია ვიდრე თქვენი რიცხვი.               ცდების რაოდენობა: {trials1}")
             else:
-                pass
-            
-        while id1 == True and id2 == True:
-            print(Fore.YELLOW + Style.BRIGHT + "======    Bank    ======")
-            print("1) ბალანსი")
-            print("2) ბალანსის შევსება")
-            print("3) თანხის გამოტანა")
-            print("4) აქაუნთიდან გასვლა" + Style.RESET_ALL)
-            answer01 = input("თქვენი მოქმედება: ")
+                print()
+                print(Fore.GREEN + Style.BRIGHT + "გილოცავთ! თქვენ გამოიცანით კომპიუტერის მიერ ჩაფიქრებული რიცხვი." + Style.RESET_ALL)
+                break
+    elif answer0 == 2:
+        comp_number2 = random.randint(1, 100)
+        trials2 = 7
+        print()
+        print("კომპიუტერმა ჩაიფიქრა რიცხვი 1-იდან 100-მდე.")
+        while True:
             print()
 
-            if answer01 == "1" or answer01 == "ბალანსი":
-                balance_found = False
+            while True:
+                try:
+                    answer2 = int(input("შეიყვანეთ თქვენი ვარაუდი: "))
+                    break
+                except ValueError:
+                    print("თქვენ მიუთითეთ არასწორი მაჩვენებელი, გთხოვთ სცადეთ თავიდან.")
 
-                for i in range(len(user_balance)):
-                    if user_balance[i][0] == user_name:
-                        balance = user_balance[i][-1]
-                        balance_found = True
+            trials2 -= 1
 
-                        print(Fore.GREEN + Style.BRIGHT + "თქვენი ბალანსი:", balance, Style.RESET_ALL)
-                        print()
-                        break
-                
-                if balance_found == False:
-                    print(Fore.RED + Style.BRIGHT + "სამწუხაროდ ბალანსი ვერ მოიძებნა." + Style.RESET_ALL)
-                    print()
-            elif answer01 == "2" or answer01 == "ბალანსის შევსება":
-                balance_found = False 
-
-                for i in range(len(user_balance)):
-                    if user_balance[i][0] == user_name:
-                        balance = user_balance[i][-1]
-                        balance_found = True
-                        break
-                
-                if balance_found == False:
-                    print(Fore.RED + Style.BRIGHT + "სამწუხაროდ ბალანსი ვერ მოიძებნა." + Style.RESET_ALL)
-                    print()
-
-                while balance_found == True:
-                    while True:
-                        try:
-                            answer001 = int(input("შეიყვანეთ თანხა რომლის შეტანაც გინდათ ბანკის ანგარიშზე: "))
-                            print()
-                            break
-                        except:
-                            print("თქვენ მიუთითეთ არასწორი მაჩვენებელი, გთხოვთ სცადოთ თავიდან.")
-                            print()
-
-                    if answer001 < 0:
-                        print(Fore.RED + Style.BRIGHT + "თქვენ არ შეგიძლიათ უარყოფითი თანხის შეტანა ანგარიშზე." + Style.RESET_ALL)
-                        print()
-                    else:
-                        bal1 = int(balance)
-                        new_balance1 = bal1 + answer001
-
-                        for user_balanc in user_balance:
-                            if user_balanc[0] == user_name:
-                                user_balanc.append(new_balance1)
-                                break
-
-                        print(Fore.GREEN + Style.BRIGHT + "თქვენ წარმატებით შეიყვანეთ თანხა ანგარიშზე." + Style.RESET_ALL)
-                        print()
-                        break
-            elif answer01 == "3" or answer01 == "თანხის გამოტანა":
-                balance_found = False 
-
-                for i in range(len(user_balance)):
-                    if user_balance[i][0] == user_name:
-                        balance = user_balance[i][-1]
-                        balance_found = True
-                        break
-                
-                if balance_found == False:
-                    print(Fore.RED + Style.BRIGHT + "სამწუხაროდ ბალანსი ვერ მოიძებნა." + Style.RESET_ALL)
-                    print()
-
-                while balance_found == True:
-                    while True:
-                        try:
-                            answer002 = int(input("შეიყვანეთ თანხა რომლის გამოტანაც გინდათ თქვენი ანგარიშიდან: "))
-                            print()
-                            break
-                        except:
-                            print("თქვენ მიუთითეთ არასწორი მაჩვენებელი, გთხოვთ სცადოთ თავიდან.")
-
-                    if answer002 > balance:
-                        print(Fore.RED + Style.BRIGHT + "თქვენ არასაკმარისი თანხა გაქვთ ბალანსზე, გთხოვთ მიუთითოთ თავიდან." + Style.RESET_ALL)
-                        print()
-                    elif answer002 < 0:
-                        print(Fore.RED + Style.BRIGHT + "თქვენ არ შეგიძლიათ უარყოფითი თანხის რაოდენობის გამოტანა." + Style.RESET_ALL)
-                        print()
-                    else:
-                        bal2 = int(balance)
-                        new_balance2 = bal2 - answer002
-
-                        for user_balances in user_balance:
-                            if user_balances[0] == user_name:
-                                user_balances.append(new_balance2)
-                                break
-                        
-                        print(Fore.GREEN + Style.BRIGHT + "თქვენ წარმატებით გამოიტანეთ თანხა ბანკის ანგარიშიდან." + Style.RESET_ALL)
-                        print()
-                        break
-            elif answer01 == "4" or answer01 == "აქაუნთიდან გასვლა":
-                print(Fore.GREEN + Style.BRIGHT + "თქვენ წარმატებით გახვედით აქაუნთიდან!" + Style.RESET_ALL)
+            if trials2 == -1:
                 print()
+                print(Fore.RED + Style.BRIGHT + "სამწუხაროდ თქვენ დაგიმთავრდათ ცდები, თქვენ წააგეთ ეს რაუნდი.")
+                print(f"კომპიუტერის მიერ ჩაფიქრებული რიცხვი იყო: {comp_number2}" + Style.RESET_ALL)
                 break
-            else:
-                print(Fore.RED + Style.BRIGHT + "თქვენ მიუთითეთ არასწორი მაჩვენებელი, გთხოვთ სცადოთ თავიდან." + Style.RESET_ALL)
+            elif answer2 > comp_number2:
                 print()
-    elif answer1 == "3" or answer1 == "გასვლა":
-        print(Fore.GREEN + Style.BRIGHT + "წარმატებებს გისურვებთ, კიდევ დაგვიბრუნდით!" + Style.RESET_ALL)
+                print(f"კომპიუტერის მიერ ჩაფიქრებული რიცხვი ნაკლებია ვიდრე თქვენი რიცხვი.                 ცდების რაოდენობა: {trials2}")
+            elif answer2 < comp_number2:
+                print()
+                print(f"კომპიუტერის მიერ ჩაფიქრებული რიცხვი მეტია ვიდრე თქვენი რიცხვი.                    ცდების რაოდენობა: {trials2}")
+            else:
+                print()
+                print(Fore.GREEN + Style.BRIGHT + "გილოცავთ! თქვენ გამოიცანით კომპიუტერის მიერ ჩაფიქრებული რიცხვი." + Style.RESET_ALL)
+                break
+    elif answer0 == 3:
+        comp_number3 = random.randint(1, 500)
+        trials3 = 10
+        print()
+        print("კომპიუტერმა ჩაიფიქრა რიცხვი 1-იდან 500-მდე")
+        while True:
+            print()
+
+            while True:
+                try:
+                    answer3 = int(input("შეიყვანეთ თქვენი ვარაუდი: "))
+                    break
+                except ValueError:
+                    print("თქვენ მიუთითეთ არასწორი მაჩვენებელი, გთხოვთ სცადეთ თავიდან.")
+
+            trials3 -= 1
+
+            if trials3 == -1:
+                print()
+                print(Fore.RED + Style.BRIGHT + "სამწუხაროდ თქვენ დაგიმთავრდათ ცდები, თქვენ წააგეთ ეს რაუნდი.")
+                print(f"კომპიუტერის მიერ ჩაფიქრებული რიცხვი იყო: {comp_number3}" + Style.RESET_ALL)
+                break
+            elif answer3 > comp_number3:
+                print()
+                print(f"კომპიუტერის მიერ ჩაფიქრებული რიცხვი ნაკლებია ვიდრე თქვენი რიცხვი.     ცდების რაოდენობა: {trials3}")
+            elif answer3 < comp_number3:
+                print()
+                print(f"კომპიუტერის მიერ ჩაფიქრებული რიცხვი მეტია ვიდრე თქვენი რიცხვი.         ცდების რაოდენობა: {trials3}")
+            else:
+                print()
+                print(Fore.GREEN + Style.BRIGHT + "გილოცავთ! თქვენ გამოიცანით კომპიუტერის მიერ ჩაფიქრებული რიცხვი." + Style.RESET_ALL)
+                break
+    elif answer0 == 4:
+        comp_number4 = random.randint(1, 1000)
+        trials4 = 12
+        print()
+        print("კომპიუტერმა ჩაიფიქრა რიცხვი 1-იდან 1000-მდე")
+        while True:
+            print()
+
+            while True:
+                try:
+                    answer4 = int(input("შეიყვანეთ თქვენი ვარაუდი: "))
+                    break
+                except ValueError:
+                    print("თქვენ მიუთითეთ არასწორი მაჩვენებელი, გთხოვთ სცადეთ თავიდან.")
+
+            trials4 -= 1
+
+            if trials4 == -1:
+                print()
+                print(Fore.RED + Style.BRIGHT + "სამწუხაროდ თქვენ დაგიმთავრდათ ცდები, თქვენ წააგეთ ეს რაუნდი.")
+                print(f"კომპიუტერის მიერ ჩაფიქრებული რიცხვი იყო: {comp_number4}" + Style.RESET_ALL)
+                break
+            elif answer4 > comp_number4:
+                print()
+                print(f"კომპიუტერის მიერ ჩაფიქრებული რიცხვი ნაკლებია ვიდრე თქვენი რიცხვი.     ცდების რაოდენობა: {trials4}")
+            elif answer4 < comp_number4:
+                print()
+                print(f"კომპიუტერის მიერ ჩაფიქრებული რიცხვი მეტია ვიდრე თქვენი რიცხვი.         ცდების რაოდენობა: {trials4}")
+            else:
+                print()
+                print(Fore.GREEN + Style.BRIGHT + "გილოცავთ! თქვენ გამოიცანით კომპიუტერის მიერ ჩაფიქრებული რიცხვი." + Style.RESET_ALL)
+                break
+    elif answer0 == 5:
+        comp_number5 = random.random()
+        trials5 = 60
+        print()
+        print("კომპიუტერმა ჩაიფიქრა რიცხვი 0-იდან 1-მდე")
+        while True:
+            print()
+
+            while True:
+                try:
+                    answer5 = float(input("შეიყვანეთ თქვენი ვარაუდი: "))
+                    break
+                except ValueError:
+                    print("თქვენ მიუთითეთ არასწორი მაჩვენებელი, გთხოვთ სცადეთ თავიდან.")
+
+            trials5 -= 1
+
+            if trials5 == -1:
+                print()
+                print(Fore.RED + Style.BRIGHT + "სამწუხაროდ თქვენ დაგიმთავრდათ ცდები, თქვენ წააგეთ ეს რაუნდი.")
+                print(f"კომპიუტერის მიერ ჩაფიქრებული რიცხვი იყო: {comp_number5}" + Style.RESET_ALL)
+                break
+            elif answer5 > comp_number5:
+                print()
+                print(f"კომპიუტერის მიერ ჩაფიქრებული რიცხვი ნაკლებია ვიდრე თქვენი რიცხვი.     ცდების რაოდენობა: {trials5}")
+            elif answer5 < comp_number5:
+                print()
+                print(f"კომპიუტერის მიერ ჩაფიქრებული რიცხვი მეტია ვიდრე თქვენი რიცხვი.         ცდების რაოდენობა: {trials5}")
+            else:
+                print()
+                print(Fore.GREEN + Style.BRIGHT + "გილოცავთ! თქვენ გამოიცანით კომპიუტერის მიერ ჩაფიქრებული რიცხვი." + Style.RESET_ALL)
+                break
+    else:
+        print()
+        print("სამწუხაროდ თქვენ მიუთითეთ არასწორი ლეველი.")
+    
+    print()
+    while True:
+        print("გინდათ რომ თამაში კიდევ ერთხელ გაიაროთ?")
+        answer01 = input("თქვენი პასუხი(კი/არა): ")
+        print()
+
+        if answer01 == "კი":
+            print(Fore.GREEN + Style.BRIGHT + "ძალიან კარგი, წარმატებებს გისურვებთ!" + Style.RESET_ALL)
+            break
+        elif answer01 == "არა":
+            print(Fore.YELLOW + Style.BRIGHT + "კარგით, როდესაც მოგინდებათ რომ გახალისდეთ დაგვიბრუნდით!" + Style.RESET_ALL)
+            break
+        else:
+            print(Fore.RED + Style.BRIGHT + "თქვენ მიუთითეთ არასწორი მაშვენებელი, გთხოვთ სცადოთ თავიდან" + Style.RESET_ALL)
+
+    if answer01 == "კი":
+        pass
+    elif answer01 == "არა":
         break
     else:
-        print(Fore.RED + Style.BRIGHT + "თქვენ მიუთითეთ არასწორი მაჩვენებელი, გთხოვთ სცადოთ თავიდან!" + Style.RESET_ALL)
-
+        pass
