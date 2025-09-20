@@ -1,0 +1,20 @@
+h1 {
+    color: red;
+}
+
+h2 {
+    color: lightcoral;
+}
+
+#films {
+    text-align: center;
+}
+
+body {
+    background: rgb(0, 0, 89);
+}
+
+.help {
+    font-size: larger;
+    color: red;
+}

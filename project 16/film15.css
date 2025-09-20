@@ -1,0 +1,23 @@
+a:hover {
+    color: orange;
+}
+
+.color1 {
+    color: blue;
+}
+
+.color2 {
+    color: green;
+}
+
+.color3 {
+    color: rgb(0, 255, 162)
+}
+
+div {
+    text-align: center;
+}
+
+body {
+    background: rgb(0, 0, 89);
+}

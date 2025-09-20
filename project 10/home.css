@@ -1,0 +1,189 @@
+body {
+    text-align: center;
+    background: linear-gradient(to bottom, lightgreen, white);
+}
+
+h2 {
+    color: red;
+    text-shadow: 1px 1px 2px black;
+}
+
+nav a {
+    text-decoration: none;
+    background-color: blue; 
+    color: red; 
+    border: 1px solid blue;
+    padding: 7px;
+    margin: 2px;
+    border-radius: 10px;
+}
+
+nav a:hover {
+    background-color: rgb(70, 97, 255);
+    border: 1px solid blue;
+    color: red;
+}
+
+nav {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+main p a {
+    text-decoration: none;
+    background-color: blue; 
+    color: red; 
+    padding: 7px;
+    margin: 2px;
+    border: 1px solid blue;
+    border-radius: 10px;
+}
+
+a {
+    text-decoration: none;
+}
+
+main p a:hover {
+    background-color: rgb(70, 97, 255);
+    border: 1px solid blue;
+    color: red;
+}
+
+.cards-sect1 {
+    display: flex;
+    margin: 20px;
+
+    justify-content: center;
+}
+
+.cards-sect2 {
+    display: flex;
+    margin: 20px;
+
+    justify-content: center;
+}
+
+.cards-sect3 {
+    display: flex;
+    margin: 20px;
+
+    justify-content: center;
+}
+
+.image {
+    box-sizing: border-box;
+    height: 400px;
+    width: 300px;
+    box-shadow: 10px 10px 10px black;
+
+    border: 1px solid black;
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    background-color: white;
+
+    margin: 20px;
+}
+
+.image:hover {
+    box-sizing: border-box;
+    height: 420px;
+    width: 320px;
+    box-shadow: 10px 10px 10px black;
+
+    font-size: large;
+
+    margin: 10px;
+    transition: 0.3s;
+}
+
+.image1 {
+    height: 60%;
+    width: 100%;
+
+    background-image: url("city1.png");
+    background-position: center;
+    background-size: cover;
+}
+
+.image2 {
+    height: 60%;
+    width: 100%;
+
+    background-image: url("city2.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.image3 {
+    height: 60%;
+    width: 100%;
+
+    background-image: url("city3.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.image4 {
+    height: 60%;
+    width: 100%;
+
+    background-image: url("city4.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.image5 {
+    height: 60%;
+    width: 100%;
+
+    background-image: url("city5.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.image6 {
+    height: 60%;
+    width: 100%;
+
+    background-image: url("city6.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.image7 {
+    height: 60%;
+    width: 100%;
+
+    background-image: url("city7.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.image8 {
+    height: 60%;
+    width: 100%;
+
+    background-image: url("city8.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.image9 {
+    height: 60%;
+    width: 100%;
+
+    background-image: url("city9.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.image10 {
+    height: 60%;
+    width: 100%;
+
+    background-image: url("city10.jpg");
+    background-position: center;
+    background-size: cover;
+}
