@@ -9,7 +9,7 @@ const Profile = () => {
     const { user, editInfo } = useAuth();
     const [formData, handleChange, handleSubmit] = useForm({
         image: "",
-        id: user.id,
+        id: user._id,
         name: "",
         email: ""
     })

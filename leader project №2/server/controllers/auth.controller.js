@@ -1,61 +1,47 @@
-const { readFile, writeFile } = require("../utils/file");
-const path = require("path");
-const fs = require("fs");
-
-const fileUrl = path.join(__dirname, "../database/users.json");
+const User = require("../models/user.model");
 
 // login user
-const login = (req, res) => {
+const login = async (req, res) => {
     const userInfo = req.body;
-
-    const users = readFile(fileUrl);
     
-    const user = users.find(u => u.email === userInfo.email && u.password === userInfo.password);
+    const user = await User.findOne({ "email": userInfo.email, "password": userInfo.password });
 
     if (!user) {
         return res.status(404).json({ message: "Password or email incorrect!" });
     }
 
-    res.status(200).json({ ...user, password: undefined });
+    res.status(200).json({ ...user._doc, password: undefined });
 }
 
 // register new user
-const register = (req, res) => {
-    const userInfo = req.body;
+const register = async (req, res) => {
+    const { name, email, password } = req.body;
 
-    if (!userInfo.password || !userInfo.email) {
+    if (!password || !email) {
         return res.status(400).json({ message: "Password and email are required to register!" });
     }
 
-    const users = readFile(fileUrl);
-
-    const isExist = users.find(u => u.email === userInfo.email);
+    const isExist = await User.findOne({ "email": email });
 
     if (isExist) {
         return res.status(400).json({ message: "This user already exist!" });
     }
 
-    const user = { id: Date.now(), role: "user", ...userInfo };
-
-    writeFile(fileUrl, user);
+    const user = User.create({ name, email, password });
 
     res.status(201).json({ ...user, password: undefined });
 }
 
 // edit user info
-const editInfo = (req, res) => {
-    const id = parseInt(req.params.id);
+const editInfo = async (req, res) => {
+    const id = req.params.id;
     const body = req.body;
 
-    const users = readFile(fileUrl);
+    if (body.name) await User.updateOne({ _id: id }, { name: body.name });
+    if (body.email) await User.updateOne({ _id: id }, { email: body.email });
+    if (body.image) await User.updateOne({ _id: id }, { image: body.image });
 
-    const user = users.find(u => u.id === id);
-
-    if (body.name) user.name = body.name;
-    if (body.email) user.email = body.email;
-    if (body.image) user.image = body.image;
-
-    fs.writeFileSync(fileUrl, JSON.stringify(users));
+    const user = await User.findById(id);
 
     res.status(200).json(user);
 }

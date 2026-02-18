@@ -1,9 +1,3 @@
-const fs = require("fs");
-const { readFile, writeFile, deleteInfo } = require('../utils/file');
-const path = require("path");
-
-const fileUrl = path.join(__dirname, "../database/products.json");
-
 // get all products
 const getAllProducts = (req, res) => {
     const products = readFile(fileUrl);
