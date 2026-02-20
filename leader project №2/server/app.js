@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const productsRouter = require("./routers/products.router");
 const authRouter = require("./routers/auth.router");
+const categoriRouter = require("./routers/categori.router");
 
 const app = express();
 
@@ -15,9 +16,11 @@ app.use(cors({
 
 app.use(morgan("dev"));
 
-// app.use("/api/products", productsRouter);
+app.use("/api/products", productsRouter);
 
 app.use("/api/users", authRouter);
+
+app.use("/api/categories", categoriRouter);
 
 mongoose.connect("mongodb://localhost:27017/onlineMarket")
     .then(() => {

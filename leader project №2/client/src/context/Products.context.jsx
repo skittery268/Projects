@@ -23,7 +23,7 @@ export const ProductsProvider = ({ children }) => {
     } 
 
     useEffect(() => {
-        if (!products) getAllProducts();
+        if (products.length === 0) getAllProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

@@ -9,17 +9,17 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
     
     const navigate = useNavigate();
 
     useEffect(() => {
         const isLogged = JSON.parse(localStorage.getItem("user"));
 
-        if (!isLogged) return;
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        if (isLogged) setUser(isLogged);
 
-        setUser(isLogged);
-        navigate("/profile")
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        setLoading(false);
     }, [])
 
     const register = async (formData) => {
@@ -96,7 +96,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ user, editInfo, register, login, logout }}>
+        <AuthContext.Provider value={{ loading, user, editInfo, register, login, logout }}>
             {children}
         </AuthContext.Provider>
     )

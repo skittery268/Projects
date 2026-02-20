@@ -1,61 +1,58 @@
-// get all products
-const getAllProducts = (req, res) => {
-    const products = readFile(fileUrl);
+const Product = require("../models/product.model");
 
-    res.status(200).json(products);
+// get all products
+const getAllProducts = async (req, res) => {
+    try {
+        const products = await Product.find();
+
+        res.status(200).json(products);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
 }
 
 // create new product
-const createProduct = (req, res) => {
-    const content = req.body;
+const createProduct = async (req, res) => {
+    try {
+        const { title, description, imageUrl, price, quantity } = req.body;
     
-    if (!content.title || !content.description || !content.imageUrl || !content.count) {
-        return res.status(400).json({ message: "Product title, description, image and product count are required!" });
+        if (!title || !description || !imageUrl || !price || !quantity) {
+            return res.status(400).json({ message: "Product title, description, image, price and quantity are required!" });
+        }
+
+        const newProduct = await Product.create({ title, description, imageUrl, price, quantity });
+
+        res.status(201).json(newProduct);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
-
-    const newProduct = { id: Date.now(), ...content };
-
-    writeFile(fileUrl, newProduct);
-
-    res.status(201).json(newProduct);
 }
 
 // delete product
-const deleteProduct = (req, res) => {
-    const id = parseInt(req.params.id);
+const deleteProduct = async (req, res) => {
+    try {
+        const id = parseInt(req.params.id);
 
-    const products = readFile(fileUrl);
+        await Product.deleteOne({ _id: id });
 
-    const productIndex = products.findIndex(p => p.id === id);
-
-    if (productIndex === -1) {
-        return res.status(404).json({ message: "Product Not Found!" });
+        res.status(204).json();
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
-
-    deleteInfo(fileUrl, productIndex);
-
-    res.status(204).json();
 }
 
 // edit product
-const editProduct = (req, res) => {
-    const body = req.body;
+const editProduct = async (req, res) => {
+    const { title, description, imageUrl, quantity, price } = req.body;
     const id = parseInt(req.params.id);
 
-    const products = readFile(fileUrl);
+    if (title) await Product.updateOne({ _id: id }, { title });
+    if (description) await Product.updateOne({ _id: id }, { description });
+    if (imageUrl) await Product.updateOne({ _id: id }, { imageUrl });
+    if (quantity) await Product.updateOne({ _id: id }, { quantity });
+    if (price) await Product.updateOne({ _id: id }, { price });
 
-    const product = products.find(p => p.id === id);
-
-    if (!product) {
-        return res.status(404).json({ message: "Product Not Found!" });
-    }
-
-    if (body.title) product.title = body.title;
-    if (body.description) product.description = body.description;
-    if (body.imageUrl) product.imageUrl = body.imageUrl;
-    if (body.count) product.count = body.count;
-
-    fs.writeFileSync(fileUrl, JSON.stringify(products));
+    const product = await Product.findById(id);
 
     res.status(200).json(product);
 }

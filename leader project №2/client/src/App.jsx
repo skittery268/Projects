@@ -8,6 +8,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Cart from "./pages/Cart";
 import Shop from "./pages/Shop";
 import Footer from "./components/Footer";
+import Products from "./pages/Products";
+import Product from "./pages/Product";
 
 const App = () => {
     return (
@@ -23,6 +25,8 @@ const App = () => {
 					<Route path="/shop" element={<Shop />} />
 					<Route path="/cart" element={<Cart />} />
 					<Route path="/wishlist" element={<p>Wishlist Page</p>} />
+					<Route path="/products/:categori" element={<Products />} />
+					<Route path="/product/:id" element={<Product />} />
 				</Routes>
 			</main>
 
