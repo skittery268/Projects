@@ -1,0 +1,48 @@
+const User = require("../models/user.model");
+
+const getUserCart = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        const user = await User.findById(id);
+
+        res.status(200).json(user.cart);
+    } catch (err) {
+        res.status(500).json(err.message);
+    }
+}
+
+const addToCart = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const product = req.body;
+
+        const user = await User.findById(id);
+
+        user.cart.push(product);
+
+        await User.updateOne({ "_id": id }, { $set: { cart: user.cart } });
+
+        res.status(200).json(user.cart);
+    } catch (err) {
+        res.status(500).json(err.message);
+    }
+}
+
+const deleteFromCart = async (req, res) => {
+    try {
+        const { id, productId } = req.params;
+
+        const user = await User.findById(id);
+
+        user.cart = user.cart.filter(p => p._id !== productId);
+
+        await user.save();
+
+        res.status(200).json(user.cart);
+    } catch (err) {
+        res.status(500).json(err.message);
+    }
+}
+
+module.exports = { getUserCart, addToCart, deleteFromCart };

@@ -20,6 +20,14 @@ const userSchema = new mongoose.Schema({
     image: {
         type: String,
         default: ""
+    },
+    cart: {
+        type: Array,
+        default: []
+    },
+    whishList: {
+        type: Array,
+        default: []
     }
 })
 

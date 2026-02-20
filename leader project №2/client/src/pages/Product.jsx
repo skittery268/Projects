@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/immutability */
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { useProducts } from "../context/Products.context";
-import { useState } from "react";
 
 const Product = () => {
     const [open, setOpen] = useState(false);
@@ -10,16 +10,23 @@ const Product = () => {
     const navigate = useNavigate();
 
     let product = products.find(p => p._id === id);
-    
-    if (localStorage.getItem("product")) product = JSON.parse(localStorage.getItem("product"));
-
-    const handleChange = (e) => {
-        const quantity = e.target.value;
-
-        product.quantity = quantity;
+    if (localStorage.getItem("product")) {
+        product = JSON.parse(localStorage.getItem("product"));
     }
 
-    console.log(product);
+    useEffect(() => {
+        if (!product) {
+            navigate("/shop");
+        }
+    }, [product, navigate]);
+
+    if (!product) return null;
+
+    const handleChange = (e) => {
+        const quantity = e.target.quantity;
+
+        product.quantity = quantity;
+    };
 
     return (
         <section>
@@ -36,7 +43,7 @@ const Product = () => {
 
                     <div className="relative">
                         <label htmlFor="qty" className="text-gray-500">Qty:</label>
-                        <input type="number" name="quantity" id="qty" defaultValue="1" onChange={(e) => handleChange(e)} className="mt-25 ml-7 border border-gray-300 outline-none rounded-full h-10 w-23 pl-10 text-gray-400" />
+                        <input type="number" name="quantity" id="qty" defaultValue="1" onChange={handleChange} className="mt-25 ml-7 border border-gray-300 outline-none rounded-full h-10 w-23 pl-10 text-gray-400" />
 
                         <div className="hover:bg-[#21B3F1] absolute border cursor-pointer border-gray-300 hover:border-white rounded-full right-0 bottom-0 h-10 w-10">
                             <img src="../icons/heartBlack.png" className="p-2 duration-300 hover:invert" />
@@ -61,7 +68,7 @@ const Product = () => {
                 </div>
             </div>
         </section>
-    )
+    );
 }
 
 export default Product;
