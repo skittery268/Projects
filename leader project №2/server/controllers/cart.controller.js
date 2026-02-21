@@ -45,4 +45,20 @@ const deleteFromCart = async (req, res) => {
     }
 }
 
-module.exports = { getUserCart, addToCart, deleteFromCart };
+const changeQuantity = async (req, res) => {
+    try {
+        const { id, productId, quantity } = req.params;
+
+        const user = await User.findOneAndUpdate(
+            { _id: id, "cart._id": productId },
+            { $set: { "cart.$.quantity": Number(quantity) } },
+            { new: true }
+        );
+
+        res.status(200).json(user.cart);
+    } catch (err) {
+        res.status(500).json(err.message);
+    }
+}
+
+module.exports = { getUserCart, addToCart, deleteFromCart, changeQuantity };
