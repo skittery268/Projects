@@ -21,7 +21,7 @@ const Cart = () => {
     }
 
     return (
-        <>  
+        <>
             <h1 className="text-[30px] mt-17 ml-30">Shopping Cart</h1>
             {
                 cart.length === 0 ? (
