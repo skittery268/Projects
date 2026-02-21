@@ -55,7 +55,7 @@ const Products = () => {
                                 <img src={product.img} alt={product.title} className="w-70 h-[80%] cursor-pointer" onClick={() => { saveToLocalStorage(product); navigate(`/product/${product._id}`) }} />
                                 <p className="text-center h-[20%] text-[14px] mt-2 hover:text-[#21B3F1] duration-500 cursor-pointer" onClick={() => { saveToLocalStorage(product); navigate(`/product/${product._id}`) }}>{product.title}</p>
                                 <p className="text-center h-[20%] text-[16px] text-[#21B3F1] font-bold">${product.price}.00</p>
-                                <button className="absolute bg-white h-10 w-30 border border-gray-300 rounded-full -bottom-3 opacity-0 group-hover:opacity-100 transition-all duration-400 group-hover:bottom-5 hover:bg-[#21B3F1] hover:text-white cursor-pointer" onClick={() => addCart(product)}>Add To Cart</button>
+                                <button className="absolute bg-white h-10 w-30 border border-gray-300 rounded-full -bottom-3 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bottom-5 hover:bg-[#21B3F1] hover:text-white cursor-pointer active:bg-white active:text-[#21B3F1]" onClick={() => addCart(product)}>Add To Cart</button>
                             </div>
                         )
                     })

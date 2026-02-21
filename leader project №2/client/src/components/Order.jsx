@@ -1,4 +1,4 @@
-const UserProducts = () => {
+const Order = () => {
     return (
         <>
             
@@ -6,4 +6,4 @@ const UserProducts = () => {
     )
 }
 
-export default UserProducts;
+export default Order;

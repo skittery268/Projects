@@ -22,12 +22,11 @@ const Cart = () => {
 
     return (
         <>
-            <h1 className="text-[30px] mt-17 ml-30">Shopping Cart</h1>
             {
                 cart.length === 0 ? (
                     <p className="ml-30 mt-2 text-[25px]">Your cart is currently empty.</p>
                 ) : (
-                    <table className="border ml-30 mt-2 border-gray-300">
+                    <table className="border ml-30 mt-5 border-gray-300">
                         <thead>
                             <tr className="border">
                                 <th className="border border-gray-300 pr-15 pl-15 pt-2 pb-2">Image</th>
@@ -46,7 +45,7 @@ const Cart = () => {
                                             <td className="border-r border-r-gray-300 text-center text-gray-400">{p.title}</td>
                                             <td className="flex relative border-r border-r-gray-300">
                                                 <form onSubmit={(e) => handleSubmit(e, p._id)} className="border absolute bottom-7 left-13 border-gray-300 text-gray-400 rounded-[5px]">
-                                                    <input type="number" name="quantity" placeholder={p.quantity} className="h-10 w-30 pl-3 outline-none pr-3" />
+                                                    <input type="number" name="quantity" min={"1"} max={p.productCount} placeholder={p.quantity} className="h-10 w-30 pl-3 outline-none pr-3" />
                                                 </form>
                                                 <button className="h-10 w-10 rounded-[5px] bg-red-600 flex justify-center items-center absolute bottom-7.5 hover:bg-red-700 cursor-pointer duration-300 left-45" onClick={() => deleteFromCart(p._id)}><img src="../icons/cross.png" className="h-4 w-4 bg-white rounded-full" /></button>
                                             </td>
