@@ -75,8 +75,22 @@ export const CartProvider = ({ children }) => {
         }
     }
 
+    const clearCart = async () => {
+        try {
+            const res = await fetch(`http://localhost:3000/api/cart/${user._id}`, {
+                method: "DELETE"
+            })
+
+            const data = await res.json();
+
+            setCart(data);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     return (
-        <CartContext.Provider value={{ cart, changeQuantity, deleteFromCart, setCart, getCart, addToCart }}>
+        <CartContext.Provider value={{ cart, clearCart, changeQuantity, deleteFromCart, setCart, getCart, addToCart }}>
             {children}
         </CartContext.Provider>
     )

@@ -1,3 +1,4 @@
+const Product = require("../models/product.model");
 const User = require("../models/user.model");
 
 const getUserCart = async (req, res) => {
@@ -61,4 +62,20 @@ const changeQuantity = async (req, res) => {
     }
 }
 
-module.exports = { getUserCart, addToCart, deleteFromCart, changeQuantity };
+const clearCart = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const user = await User.findById(id);
+
+        user.cart = [];
+        await user.save();
+
+        res.status(200).json(user.cart);
+    } catch (err) {
+        res.status(500).json(err.message)
+        console.log(err);
+    }
+}
+
+module.exports = { getUserCart, addToCart, deleteFromCart, changeQuantity, clearCart };
