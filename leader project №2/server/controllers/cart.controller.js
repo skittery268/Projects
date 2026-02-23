@@ -22,7 +22,7 @@ const addToCart = async (req, res) => {
 
         user.cart.push(product);
 
-        await User.updateOne({ "_id": id }, { $set: { cart: user.cart } });
+        await user.save();
 
         res.status(200).json(user.cart);
     } catch (err) {
@@ -67,6 +67,15 @@ const clearCart = async (req, res) => {
         const { id } = req.params;
 
         const user = await User.findById(id);
+
+        await Promise.all(
+            user.cart.map(p => {
+                return Product.updateOne(
+                    { _id: p._id },
+                    { $inc: { productCount: -p.quantity } }
+                )
+            })
+        )
 
         user.cart = [];
         await user.save();

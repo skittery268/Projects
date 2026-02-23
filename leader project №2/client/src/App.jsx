@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import Products from "./pages/Products";
 import Product from "./pages/Product";
 import CartPage from "./pages/CartPage";
+import WhishList from "./pages/WhishList";
 
 const App = () => {
     return (
@@ -22,11 +23,11 @@ const App = () => {
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
 					<Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-					<Route path="/shop" element={<Shop />} />
-					<Route path="/cart" element={<CartPage />} />
-					<Route path="/wishlist" element={<p>Wishlist Page</p>} />
-					<Route path="/products/:categori" element={<Products />} />
-					<Route path="/product/:id" element={<Product />} />
+					<Route path="/shop" element={<ProtectedRoute><Shop /></ProtectedRoute>} />
+					<Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
+					<Route path="/wishlist" element={<ProtectedRoute><WhishList /></ProtectedRoute>} />
+					<Route path="/products/:categori" element={<ProtectedRoute><Products /></ProtectedRoute>} />
+					<Route path="/product/:id" element={<ProtectedRoute><Product /></ProtectedRoute>} />
 				</Routes>
 			</main>
 

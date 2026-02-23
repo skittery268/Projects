@@ -6,13 +6,15 @@ const ProductsContext = createContext();
 // eslint-disable-next-line react-refresh/only-export-components
 export const useProducts = () => useContext(ProductsContext);
 
+const api_url = "http://localhost:3000/api/products"
+
 export const ProductsProvider = ({ children }) => {
     const [products, setProducts] = useState([]);
     const { user } = useAuth();
 
     const getAllProducts = async () => {
         try {
-            const res = await fetch("http://localhost:3000/api/products");
+            const res = await fetch(api_url);
 
             const data = await res.json();
 
@@ -29,7 +31,7 @@ export const ProductsProvider = ({ children }) => {
 
     const uploadProduct = async (formData) => {
         try {
-            const res = await fetch("http://localhost:3000/api/products", {
+            const res = await fetch(api_url, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"

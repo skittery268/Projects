@@ -14,7 +14,7 @@ const Nav = () => {
                 <Link to={"/"} className="text-[25px] text-white absolute top-4 left-20">Online Market</Link>
                 <ul className="absolute top-6 left-100 flex justify-center items-center text-white gap-10">
                     <li><Link to={"/"} className="text-[17px] hover:text-[#e5e5e5] transition">Home</Link></li>
-                    <li><Link to={"/shop"} className="text-[17px] hover:text-[#e5e5e5] transition">Shop</Link></li>
+                    { user && <li><Link to={"/shop"} className="text-[17px] hover:text-[#e5e5e5] transition">Shop</Link></li> } 
                 </ul>
                 
                 <img src="./icons/settings.png" onClick={() => setOpen(!open)} className="absolute right-10 h-5 top-6 cursor-pointer" />

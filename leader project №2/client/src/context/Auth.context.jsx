@@ -7,6 +7,8 @@ const AuthContext = createContext();
 // eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => useContext(AuthContext);
 
+const api_url = "http://localhost:3000/api/users";
+
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -24,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
     const register = async (formData) => {
         try {
-            const res = await fetch("http://localhost:3000/api/users/register", {
+            const res = await fetch(`${api_url}/register`, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"
@@ -47,7 +49,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (formData) => {
         try {
-            const res = await fetch("http://localhost:3000/api/users/login", {
+            const res = await fetch(`${api_url}/login`, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"
@@ -78,7 +80,7 @@ export const AuthProvider = ({ children }) => {
 
     const editInfo = async (formData) => {
         try {
-            const res = await fetch(`http://localhost:3000/api/users/edit/${formData.id}`, {
+            const res = await fetch(`${api_url}/edit/${formData.id}`, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"

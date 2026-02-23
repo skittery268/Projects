@@ -13,13 +13,13 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    price: {
-        type: Number,
-        required: true
-    },
     quantity: {
         type: Number,
         default: 1
+    },
+    price: {
+        type: Number,
+        required: true
     }
 })
 

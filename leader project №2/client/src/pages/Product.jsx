@@ -3,12 +3,15 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { useProducts } from "../context/Products.context";
 import { useCart } from "../context/CartContext";
+import { useWhishList } from "../context/WhishList";
 
 const Product = () => {
     const [open, setOpen] = useState(false);
+    const [inWhishList, setInWhishList] = useState(false);
     const { id } = useParams();
     const { products } = useProducts();
     const { cart, setCart, changeQuantity, addToCart } = useCart();
+    const { whishList, addToWhishList, deleteFromWhishList } = useWhishList();
     const navigate = useNavigate();
 
     let product = products.find(p => p._id === id);
@@ -17,10 +20,19 @@ const Product = () => {
     }
 
     useEffect(() => {
+        const exist = whishList.find(p => p._id === product._id);
+
+        if (exist) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
+            setInWhishList(true);
+        } else {
+            setInWhishList(false);
+        }
+
         if (!product) {
             navigate("/shop");
         }
-    }, [product, navigate]);
+    }, [product, navigate, whishList]);
 
     if (!product) return null;
 
@@ -51,6 +63,18 @@ const Product = () => {
         }
     }
 
+    const addWhishList = () => {
+        const exist = whishList.find(p => p._id === product._id);
+
+        console.log("A")
+
+        if (!exist) {
+            addToWhishList(product);
+        } else {
+            deleteFromWhishList(product._id);
+        }
+    }
+
     return (
         <section>
             <div className="h-160 mt-20 flex justify-center items-center">
@@ -71,8 +95,8 @@ const Product = () => {
                             <input type="number" name="quantity" id="qty" defaultValue={"1"} min={"1"} max={product.productCount} className="mt-25 ml-7 border border-gray-300 outline-none rounded-full h-10 w-23 pl-10 text-gray-400" />
                         </form>
 
-                        <div className="hover:bg-[#21B3F1] absolute border cursor-pointer border-gray-300 hover:border-white rounded-full right-0 bottom-0 h-10 w-10">
-                            <img src="../icons/heartBlack.png" className="p-2 duration-300 hover:invert" />
+                        <div className={`absolute border cursor-pointer border-gray-300 ${inWhishList ? "bg-[#21B3F1]" : "hover:border-white hover:bg-[#21B3F1]"} rounded-full right-0 bottom-0 h-10 w-10`} onClick={addWhishList}>
+                            <img src="../icons/heartBlack.png" className={`p-2 duration-300 ${inWhishList ? "invert" : "hover:invert"}`} />
                         </div>
                     </div>
 

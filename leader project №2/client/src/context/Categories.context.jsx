@@ -5,12 +5,14 @@ const CategoriesContext = createContext();
 // eslint-disable-next-line react-refresh/only-export-components
 export const useCategories = () => useContext(CategoriesContext);
 
+const api_url = "http://localhost:3000/api/categories"
+
 export const CategoriesProvider = ({ children }) => {
     const [categories, setCategories] = useState([]);
 
     const getCategories = async () => {
         try {
-            const res = await fetch("http://localhost:3000/api/categories");
+            const res = await fetch(`${api_url}`);
 
             const data = await res.json();
 

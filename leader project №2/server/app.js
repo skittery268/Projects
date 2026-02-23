@@ -6,6 +6,7 @@ const productsRouter = require("./routers/products.router");
 const authRouter = require("./routers/auth.router");
 const categoriRouter = require("./routers/categori.router");
 const cartRouter = require("./routers/cart.router");
+const whishListRouter = require("./routers/whishlist.router");
 
 const app = express();
 
@@ -24,6 +25,8 @@ app.use("/api/users", authRouter);
 app.use("/api/categories", categoriRouter);
 
 app.use("/api/cart", cartRouter);
+
+app.use("/api/whishlist", whishListRouter);
 
 mongoose.connect("mongodb://localhost:27017/onlineMarket")
     .then(() => {

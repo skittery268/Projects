@@ -8,6 +8,8 @@ const CartContext = createContext();
 // eslint-disable-next-line react-refresh/only-export-components
 export const useCart = () => useContext(CartContext);
 
+const api_url = "http://localhost:3000/api/cart";
+
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
     const { loading, user } = useAuth();
@@ -31,7 +33,7 @@ export const CartProvider = ({ children }) => {
 
     const addToCart = async (product) => {
         try {
-            const res = await fetch(`http://localhost:3000/api/cart/${user._id}`, {
+            const res = await fetch(`${api_url}/${user._id}`, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"
@@ -49,7 +51,7 @@ export const CartProvider = ({ children }) => {
 
     const deleteFromCart = async (productId) => {
         try {
-            const res = await fetch(`http://localhost:3000/api/cart/${user._id}/${productId}`, {
+            const res = await fetch(`${api_url}/${user._id}/${productId}`, {
                 method: "DELETE"
             })
 
@@ -63,7 +65,7 @@ export const CartProvider = ({ children }) => {
 
     const changeQuantity = async (productId, quantity) => {
         try {
-            const res = await fetch(`http://localhost:3000/api/cart/${user._id}/${productId}/${quantity}`, {
+            const res = await fetch(`${api_url}/${user._id}/${productId}/${quantity}`, {
                 method: "PATCH"
             })
 
@@ -77,7 +79,7 @@ export const CartProvider = ({ children }) => {
 
     const clearCart = async () => {
         try {
-            const res = await fetch(`http://localhost:3000/api/cart/${user._id}`, {
+            const res = await fetch(`${api_url}/${user._id}`, {
                 method: "DELETE"
             })
 
