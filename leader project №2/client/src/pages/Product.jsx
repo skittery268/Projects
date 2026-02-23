@@ -66,8 +66,6 @@ const Product = () => {
     const addWhishList = () => {
         const exist = whishList.find(p => p._id === product._id);
 
-        console.log("A")
-
         if (!exist) {
             addToWhishList(product);
         } else {
