@@ -31,12 +31,12 @@ export const ProductsProvider = ({ children }) => {
 
     const uploadProduct = async (formData) => {
         try {
-            const res = await fetch(api_url, {
+            const res = await fetch(`${api_url}/${user._id}`, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"
                 },
-                body: JSON.stringify({ ...formData, userId: user.id })
+                body: JSON.stringify(formData)
             });
 
             const data = await res.json();
@@ -46,9 +46,46 @@ export const ProductsProvider = ({ children }) => {
             console.log(err);
         }
     }
+
+    const deleteProduct = async (id) => {
+        try {
+            const res = await fetch(`${api_url}/${id}`, {
+                method: "DELETE"
+            })
+
+            if (!res.ok) {
+                const data = await res.json();
+                console.log(data);
+                return;
+            }
+
+            const data = await res.json();
+            setProducts(data);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    const editProduct = async (formData, id) => {
+        try {
+            const res = await fetch(`${api_url}/${id}`, {
+                method: "PATCH",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            })
+
+            const data = await res.json();
+
+            setProducts(data);
+        } catch (err) {
+            console.log(err);
+        }
+    }
     
     return (
-        <ProductsContext.Provider value={{ products, getAllProducts, uploadProduct }}>
+        <ProductsContext.Provider value={{ products, getAllProducts, uploadProduct, deleteProduct, editProduct }}>
             {children}
         </ProductsContext.Provider>
     )

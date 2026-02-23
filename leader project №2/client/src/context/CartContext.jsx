@@ -86,6 +86,7 @@ export const CartProvider = ({ children }) => {
             const data = await res.json();
 
             setCart(data);
+            localStorage.removeItem("product");
         } catch (err) {
             console.log(err);
         }

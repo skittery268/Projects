@@ -11,6 +11,8 @@ import Products from "./pages/Products";
 import Product from "./pages/Product";
 import CartPage from "./pages/CartPage";
 import WhishList from "./pages/WhishList";
+import ScrollToTop from "./components/ScrollToTop";
+import UploadProduct from "./pages/UploadProduct";
 
 const App = () => {
     return (
@@ -18,6 +20,7 @@ const App = () => {
 			<Nav />
 
 			<main>
+				<ScrollToTop />
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/login" element={<Login />} />
@@ -28,6 +31,7 @@ const App = () => {
 					<Route path="/wishlist" element={<ProtectedRoute><WhishList /></ProtectedRoute>} />
 					<Route path="/products/:categori" element={<ProtectedRoute><Products /></ProtectedRoute>} />
 					<Route path="/product/:id" element={<ProtectedRoute><Product /></ProtectedRoute>} />
+					<Route path="/uploadproduct" element={<ProtectedRoute><UploadProduct /></ProtectedRoute>} />
 				</Routes>
 			</main>
 

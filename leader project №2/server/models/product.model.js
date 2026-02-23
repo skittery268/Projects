@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema({
+    authorId: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: true
@@ -13,13 +17,21 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    quantity: {
-        type: Number,
-        default: 1
+    category: {
+        type: String,
+        required: true
     },
     price: {
         type: Number,
         required: true
+    },
+    productCount: {
+        type: Number,
+        required: true
+    },
+    quantity: {
+        type: Number,
+        default: 1
     }
 })
 

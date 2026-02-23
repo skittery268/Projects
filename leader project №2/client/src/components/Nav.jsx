@@ -21,7 +21,7 @@ const Nav = () => {
 
                 {
                     open && (
-                        <div className={`bg-white ${user ? "h-40" : "h-20"} w-50 absolute right-10 top-15 rounded-[5px] flex flex-col justify-center gap-3 pl-6 shadow`}>
+                        <div className={`bg-white ${user ? "h-50" : "h-20"} w-50 absolute right-10 top-15 rounded-[5px] flex flex-col justify-center gap-3 pl-6 shadow-lg`}>
                             {
                                 !user ? (
                                     <>
@@ -33,7 +33,8 @@ const Nav = () => {
                                         <Link to={"/profile"} onClick={() => setOpen(false)} className="text-gray-400 w-25 hover:text-blue-400 transition duration-300">My Account</Link>
                                         <Link to={"/cart"} onClick={() => setOpen(false)} className="text-gray-400 w-5 hover:text-blue-400 transition duration-300">Cart</Link>
                                         <Link to={"/wishlist"} onClick={() => setOpen(false)} className="text-gray-400 w-20 hover:text-blue-400 transition duration-300">Whish List</Link>
-                                        <button onClick={logout} className="text-[17px] text-gray-400 hover:text-red-500 text-start transition duration-300 cursor-pointer">Log Out</button>
+                                        <Link to={"/uploadproduct"} onClick={() => setOpen(false)} className="text-gray-400 w-30 hover:text-blue-400 transition duration-300">Upload Product</Link>
+                                        <button onClick={() => { logout(); setOpen(false) }} className="text-[17px] text-gray-400 hover:text-red-500 text-start transition duration-300 cursor-pointer">Log Out</button>
                                     </>
                                 )
                             }

@@ -7,7 +7,7 @@ const productsRouter = express.Router();
 productsRouter.get("/", getAllProducts);
 
 // create new product
-productsRouter.post("/", createProduct);
+productsRouter.post("/:authorId", createProduct);
 
 // delete product
 productsRouter.delete("/:id", deleteProduct);

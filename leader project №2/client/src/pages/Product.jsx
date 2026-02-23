@@ -9,7 +9,7 @@ const Product = () => {
     const [open, setOpen] = useState(false);
     const [inWhishList, setInWhishList] = useState(false);
     const { id } = useParams();
-    const { products } = useProducts();
+    const { products, deleteProduct } = useProducts();
     const { cart, setCart, changeQuantity, addToCart } = useCart();
     const { whishList, addToWhishList, deleteFromWhishList } = useWhishList();
     const navigate = useNavigate();
@@ -98,7 +98,10 @@ const Product = () => {
                         </div>
                     </div>
 
-                    <button className="mt-10 text-center w-123 rounded-full hover:bg-[#21B3F1] hover:text-white duration-300 cursor-pointer font-bold h-10 border border-gray-300 active:bg-white active:text-[#21B3F1]" onClick={addCart}>Add to Cart</button>
+                    <div className="flex flex-col">
+                        <button className="mt-10 text-center w-123 rounded-full hover:bg-[#21B3F1] hover:text-white duration-300 cursor-pointer font-bold h-10 border border-gray-300 active:bg-white active:text-[#21B3F1]" onClick={addCart}>Add to Cart</button>
+                        <button className="mt-3 text-center w-123 rounded-full hover:bg-red-500 hover:text-white duration-300 cursor-pointer font-bold h-10 border border-gray-300 active:bg-white active:text-red-500" onClick={() => { deleteProduct(product._id); navigate("/shop")}}>Delete Product</button>
+                    </div>
 
                     <div className="flex justify-between items-center mt-5">
                         <div className="relative">

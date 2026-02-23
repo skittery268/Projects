@@ -3,7 +3,7 @@ import { useAuth } from "../context/Auth.context";
 import { Link } from "react-router";
 
 const Register = () => {
-    const [formData, handleChange, handleSubmit] = useForm({
+    const [formData, handleChange, handleSubmit, resetForm] = useForm({
         name: "",
         email: "",
         password: ""
@@ -11,9 +11,14 @@ const Register = () => {
 
     const { register } = useAuth();
 
+    const registerUser = (e) => {
+        handleSubmit(e, register);
+        resetForm();
+    }
+
     return (
         <section className="flex justify-center items-center h-[90vh]">
-            <form onSubmit={(e) => handleSubmit(e, register)} className="w-90 h-120 bg-[white] border rounded-[10px] relative border-[#cfcfcf]">
+            <form onSubmit={(e) => registerUser(e)} className="w-90 h-120 bg-[white] border rounded-[10px] relative border-[#cfcfcf]">
                 <h1 className="absolute left-6 top-4 text-2xl">Registration</h1>
                 <img src="./icons/user.png" className="h-6 absolute top-25 left-5" />
                 <input type="text" name="name" value={formData.name} placeholder="Enter your name" onChange={handleChange} className="absolute top-25 left-5 border-b focus:border-b-black border-b-gray-300 pl-8 w-80 pb-2 outline-none" />

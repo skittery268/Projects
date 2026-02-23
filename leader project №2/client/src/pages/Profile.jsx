@@ -3,72 +3,57 @@ import { useAuth } from "../context/Auth.context";
 import { useForm } from "../hooks/useForm";
 
 const Profile = () => {
-    const [edit1, setEdit1] = useState(false);
-    const [edit2, setEdit2] = useState(false);
-    const [edit3, setEdit3] = useState(false);
     const { user, editInfo } = useAuth();
-    const [formData, handleChange, handleSubmit] = useForm({
+    const [isEditing, setIsEditing] = useState(false);
+    const [formData, handleChange, handleSubmit, resetForm] = useForm({
         image: "",
         id: user._id,
         name: "",
         email: ""
-    })
-    
+    });
+
+    const saveChanges = (e) => {
+        handleSubmit(e, editInfo);
+        setIsEditing(false);
+        resetForm();
+    };
+
     return (
-        <>
-            <div className="h-50 w-250 border border-gray-400 rounded-[5px] relative left-70 top-10 ">
-                <img src={!user.image ? "./icons/user2.png" : user.image} className="h-40 absolute rounded-full top-3 left-5" />
-                <div className="absolute top-5 left-55 text-2xl bg-blue-200 w-130 h-10 rounded-[10px] flex justify-between items-center text-white">
-                    {
-                        edit1 ? (
-                            <form onSubmit={(e) => { handleSubmit(e, editInfo), setEdit1(false) }}><input type="text" name="name" value={formData.name} onChange={handleChange} className="ml-5 rounded-[5px] placeholder:text-[20px] pl-2 outline-none text-black bg-white placeholder:text-gray-400" placeholder="Edit your name.." /></form>
-                        ) : (
-                            <h1 className="ml-5">{user.name}</h1>
-                        )
-                    }
-                    {
-                        edit1 ? (
-                            <button className="mr-5 cursor-pointer" onClick={() => setEdit1(false)}><img src="./icons/close.png" className="h-4" /></button>
-                        ) : (
-                            <button className="mr-5 cursor-pointer" onClick={() => setEdit1(true)}><img src="./icons/pencil.png" className="h-4" /></button>
-                        )
-                    }
-                </div>
-                <div className="absolute top-20 left-55 text-2xl bg-blue-200 w-130 h-10 rounded-[10px] flex justify-between items-center text-white">
-                    {
-                        edit2 ? (
-                            <form onSubmit={(e) => { handleSubmit(e, editInfo), setEdit2(false) }}><input type="email" name="email" value={formData.email} onChange={handleChange} className="ml-5 rounded-[5px] placeholder:text-[20px] pl-2 outline-none text-black bg-white placeholder:text-gray-400" placeholder="Edit your email.." /></form>
-                        ) : (
-                            <h1 className="ml-5">{user.email}</h1>
-                        )
-                    }
-                    {
-                        edit2 ? (
-                            <button className="mr-5 cursor-pointer" onClick={() => setEdit2(false)}><img src="./icons/close.png" className="h-4" /></button>
-                        ) : (
-                            <button className="mr-5 cursor-pointer" onClick={() => setEdit2(true)}><img src="./icons/pencil.png" className="h-4" /></button>
-                        )
-                    }
-                </div>
-                <div className="absolute top-35 left-55 text-2xl bg-blue-200 w-130 h-10 rounded-[10px] flex justify-between items-center text-white">
-                    {
-                        edit3 ? (
-                            <form onSubmit={(e) => { handleSubmit(e, editInfo), setEdit3(false) }}><input type="text" name="image" value={formData.image} onChange={handleChange} className="ml-5 rounded-[5px] placeholder:text-[20px] pl-2 outline-none text-black bg-white placeholder:text-gray-400" placeholder="Edit your profile image.." /></form>
-                        ) : (
-                            <h1 className="ml-5">Profile image..</h1>
-                        )
-                    }
-                    {
-                        edit3 ? (
-                            <button className="mr-5 cursor-pointer" onClick={() => setEdit3(false)}><img src="./icons/close.png" className="h-4" /></button>
-                        ) : (
-                            <button className="mr-5 cursor-pointer" onClick={() => setEdit3(true)}><img src="./icons/pencil.png" className="h-4" /></button>
-                        )
-                    }
-                </div>
+        <div className="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
+            <div className="p-6 bg-linear-to-r from-blue-400 to-indigo-500 text-white text-center">
+                <img src={!user.image ? './icons/user2.png' : user.image} className="w-24 h-24 rounded-full object-cover mx-auto border-4 border-white" />
+                <h2 className="mt-4 text-2xl font-semibold">{user.name}</h2>
+                <p className="text-sm opacity-90">{user.email}</p>
+                {
+                    !isEditing && (
+                        <button className="mt-4 px-4 py-2 bg-white text-blue-600 rounded hover:bg-gray-100 cursor-pointer" onClick={() => setIsEditing(true)}>Edit Profile</button>
+                    )
+                }
             </div>
-        </>
-    )
+            {
+                isEditing && (
+                    <form className="p-6 space-y-4 bg-gray-50" onSubmit={(e) => saveChanges(e)}>
+                        <div>
+                            <label className="block text-gray-700 text-sm mb-1">Name</label>
+                            <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full px-3 py-2 border rounded outline-none focus:ring" placeholder={user.name} />
+                        </div>
+                        <div>
+                            <label className="block text-gray-700 text-sm mb-1">Email</label>
+                            <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full px-3 py-2 border rounded outline-none focus:ring" placeholder={user.email} />
+                        </div>
+                        <div>
+                            <label className="block text-gray-700 text-sm mb-1">Profile Image URL</label>
+                            <input type="text" name="image" value={formData.image} onChange={handleChange} className="w-full px-3 py-2 border rounded outline-none focus:ring" placeholder="Image URL..." />
+                        </div>
+                        <div className="flex justify-end space-x-2">
+                            <button type="button" className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 cursor-pointer" onClick={() => setIsEditing(false)}>Cancel</button>
+                            <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer">Save</button>
+                        </div>
+                    </form>
+                )
+            }
+        </div>
+    );
 }
 
 export default Profile;

@@ -14,11 +14,7 @@ const Categories = () => {
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-12 text-center">Browse Categories</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {categories.map(category => (
-                        <Link 
-                            key={category._id}
-                            to={user ? `/products/${category.categori}` : "/login"}
-                            className="bg-white rounded-lg shadow-md p-8 text-center hover:shadow-xl hover:scale-105 transition"
-                        >
+                        <Link  key={category._id} to={user ? `/products/${category.categori}` : "/login"} className="bg-white rounded-lg shadow-md p-8 text-center hover:shadow-xl duration-300 transition">
                             <div className="text-5xl mb-4"><img src={category.img} alt={category.categori} /></div>
                             <h3 className="text-xl font-bold text-gray-800">{category.categori}</h3>
                             <p className="text-gray-500 mt-2">Click to explore</p>

@@ -15,5 +15,9 @@ export const useForm = (initialValues) => {
         cb(formData);
     }
 
-    return [formData, handleChange, handleSubmit]
+    const resetForm = () => {
+        setFormData(initialValues);
+    }
+
+    return [formData, handleChange, handleSubmit, resetForm];
 }
